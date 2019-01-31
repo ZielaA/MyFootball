@@ -51,7 +51,11 @@ public class Person {
 	//Other methods
 	private void determinAge()
 	{
-		if(dateOfBirth == null) age = -1;
+		if(dateOfBirth == null) 
+		{
+			age = -1;
+			return;
+		}
 		GregorianCalendar now = new GregorianCalendar();
 		age = now.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR) -1 ;
 		if(now.get(Calendar.MONTH) >= dateOfBirth.get(Calendar.MONTH) && now.get(Calendar.DAY_OF_MONTH) >= dateOfBirth.get(Calendar.DAY_OF_MONTH))
@@ -62,7 +66,11 @@ public class Person {
 	
 	public String info()
 	{
-		String s = name + " " + surname + "Age: " + age;
+		String s = new String();
+		if(name != null) s+= name + " ";
+		s += surname;
+		if(age > 0) s += "	Age: " + age;
+		else s += "	Age: unknown"; 
 		return s;
 	}
 	

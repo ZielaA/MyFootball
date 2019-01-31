@@ -29,38 +29,26 @@ public class Footballer extends Person
 
 	
 	//constructors
-	public Footballer(String name, String surname, GregorianCalendar dayOfBirth, int scoredGoals, int assists, int numberOnShirt)
+	private Footballer(final Builder builder)
 	{
-		super(name, surname, dayOfBirth);
-		this.scoredGoals = scoredGoals;
-		this.assists = assists;
-		this.numberOnShirt = numberOnShirt;
+		super(builder.name, builder.surname, builder.dateOfBirth);
+		this.scoredGoals = builder.scoredGoals;
+		this.assists = builder.assists;
+		this.numberOnShirt = builder.numberOnShirt;
+		
 	}
 	
-	public Footballer(String name, String surname, GregorianCalendar dayOfBirth) 
-	{
-		super(name, surname, dayOfBirth);
-		scoredGoals = 0;
-		assists = 0;
-		numberOnShirt = -1;
-		
-	}
-
-	public Footballer(String name, String surname) 
-	{
-		super(name, surname);
-		scoredGoals = 0;
-		assists = 0;
-		numberOnShirt = -1;
-		
-	}
+	
 
 	//other methods
 	@Override
 	public String info()
 	{
 		String s = super.info();
-		return s + "		Number on shirt: " + numberOnShirt + "	  Scored goals: " + scoredGoals + "	Assists" + assists; 
+		if(numberOnShirt > 0 ) s += "		Number on shirt: " + numberOnShirt;
+		else s += "		Number on shirt: unknown";
+		
+		return s + "	  Scored goals: " + scoredGoals + "	Assists: " + assists; 
 	}
 
 	public void addScoredGoals(int goalsToAdd)
@@ -71,5 +59,56 @@ public class Footballer extends Person
 	public void addAssists(int assistsToAdd)
 	{
 		assists += assistsToAdd;
+	}
+	
+	public static class Builder
+	{
+		private String name;
+		private final String surname;
+		private GregorianCalendar dateOfBirth;
+		private int scoredGoals;
+		private int assists;
+		private int numberOnShirt;
+		
+		
+		public Builder(final String surname)
+		{
+			this.surname = surname;
+		}
+		
+		public Builder name(final String name)
+		{
+			this.name = name;
+			return this;
+		}
+		
+		public Builder datOfBirth(final GregorianCalendar dateOfBirth)
+		{
+			this.dateOfBirth = dateOfBirth;
+			return this;
+		}
+		
+		public Builder scoredGoals(final int scoredGoals)
+		{
+			this.scoredGoals = scoredGoals;
+			return this;
+		}
+		
+		public Builder assists(final int assists)
+		{
+			this.assists = assists;
+			return this;
+		}
+		
+		public Builder numberOnShirt(final int numberOnShirt)
+		{
+			this.numberOnShirt = numberOnShirt;
+			return this;
+		}
+		
+		public Footballer build()
+		{
+			return new Footballer(this);
+		}
 	}
 }
