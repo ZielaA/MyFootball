@@ -51,16 +51,19 @@ public class Person {
 	//Other methods
 	private void determinAge()
 	{
+		if(dateOfBirth == null) age = -1;
 		GregorianCalendar now = new GregorianCalendar();
-		// 
 		age = now.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR) -1 ;
-		//jeśli miał w tym roku urodziny, zwiększ wiek
 		if(now.get(Calendar.MONTH) >= dateOfBirth.get(Calendar.MONTH) && now.get(Calendar.DAY_OF_MONTH) >= dateOfBirth.get(Calendar.DAY_OF_MONTH))
 		{
 			age++;
 		}
 	}
 	
-	
+	public String info()
+	{
+		String s = name + " " + surname + "Age: " + age;
+		return s;
+	}
 	
 }
