@@ -69,8 +69,8 @@ public class Person {
 		String s = new String();
 		if(name != null) s+= name + " ";
 		s += surname;
-		if(age > 0) s += "	Age: " + age;
-		else s += "	Age: unknown"; 
+		if(age > 0) s += "		Age: " + age;
+		else s += " 	Age: unknown"; 
 		return s;
 	}
 	

@@ -29,7 +29,7 @@ public class Footballer extends Person
 
 	
 	//constructors
-	private Footballer(final Builder builder)
+	protected Footballer(final Builder builder)
 	{
 		super(builder.name, builder.surname, builder.dateOfBirth);
 		this.scoredGoals = builder.scoredGoals;
@@ -61,6 +61,14 @@ public class Footballer extends Person
 		assists += assistsToAdd;
 	}
 	
+	public void resetStats()
+	{
+		scoredGoals = 0;
+		assists = 0;
+	}
+
+	
+	//fluent builder inner class
 	public static class Builder
 	{
 		private String name;
