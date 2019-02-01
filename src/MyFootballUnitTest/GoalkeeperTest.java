@@ -12,11 +12,10 @@ public class GoalkeeperTest {
 
 	@Test
 	public void GoalkeeperBuildertest() {
-		Goalkeeper gk = (Goalkeeper) new Goalkeeper.GoalkeeperBuilder("Curtois")
+		Goalkeeper gk = (Goalkeeper) new Goalkeeper.GoalkeeperBuilder("Curtois", 1)
 		.lostGoals(13)
 		.cleanSheets(3)
 		.assists(1)
-		.numberOnShirt(1)
 		.build();
 		
 		assertEquals(13, gk.getLostGoals());
@@ -26,11 +25,10 @@ public class GoalkeeperTest {
 	@Test
 	public void addCleanSheetsTest()
 	{
-		Goalkeeper gk = (Goalkeeper) new Goalkeeper.GoalkeeperBuilder("Curtois")
+		Goalkeeper gk = (Goalkeeper) new Goalkeeper.GoalkeeperBuilder("Curtois", 1)
 		.lostGoals(13)
 		.cleanSheets(3)
 		.assists(1)
-		.numberOnShirt(1)
 		.build();
 		
 		gk.addCleanSheet();
@@ -40,11 +38,10 @@ public class GoalkeeperTest {
 	@Test
 	public void addLostGoalsTest()
 	{
-		Goalkeeper gk = (Goalkeeper) new Goalkeeper.GoalkeeperBuilder("Curtois")
+		Goalkeeper gk = (Goalkeeper) new Goalkeeper.GoalkeeperBuilder("Curtois", 1)
 		.lostGoals(13)
 		.cleanSheets(3)
 		.assists(1)
-		.numberOnShirt(1)
 		.build();
 		
 		gk.addLostGoals(2);
@@ -54,11 +51,10 @@ public class GoalkeeperTest {
 	@Test
 	public void ResetStatsTest()
 	{
-		Goalkeeper gk = (Goalkeeper) new Goalkeeper.GoalkeeperBuilder("Curtois")
+		Goalkeeper gk = (Goalkeeper) new Goalkeeper.GoalkeeperBuilder("Curtois", 1)
 		.lostGoals(13)
 		.cleanSheets(3)
 		.assists(1)
-		.numberOnShirt(1)
 		.build();
 		
 		gk.resetStats();

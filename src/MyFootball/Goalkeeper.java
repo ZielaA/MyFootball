@@ -57,8 +57,8 @@ public class Goalkeeper extends Footballer {
 		private int cleanSheets;
 		private int lostGoals;
 		
-		public GoalkeeperBuilder(String surname) {
-			super(surname);
+		public GoalkeeperBuilder(String surname, int numberOnShirt) {
+			super(surname, numberOnShirt);
 		}
 		
 		public GoalkeeperBuilder cleanSheets(final int cleanSheets)

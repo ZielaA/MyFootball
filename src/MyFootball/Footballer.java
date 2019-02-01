@@ -79,9 +79,10 @@ public class Footballer extends Person
 		private int numberOnShirt;
 		
 		
-		public Builder(final String surname)
+		public Builder(final String surname, int numberOnShirt)
 		{
 			this.surname = surname;
+			this.numberOnShirt = numberOnShirt;
 		}
 		
 		public Builder name(final String name)
@@ -108,15 +109,11 @@ public class Footballer extends Person
 			return this;
 		}
 		
-		public Builder numberOnShirt(final int numberOnShirt)
-		{
-			this.numberOnShirt = numberOnShirt;
-			return this;
-		}
 		
 		public Footballer build()
 		{
 			return new Footballer(this);
 		}
+
 	}
 }

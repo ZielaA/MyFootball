@@ -13,9 +13,8 @@ public class FootballerTest
 	
 	@Test
 	public void BuilderTest1() {
-		Footballer f = new Footballer.Builder("Kowalski")
+		Footballer f = new Footballer.Builder("Kowalski", 24)
 		.name("Jan")
-		.numberOnShirt(24)
 		.assists(11)
 		.scoredGoals(10)
 		.datOfBirth(new GregorianCalendar(1990, 4, 10))
@@ -33,9 +32,8 @@ public class FootballerTest
 	
 	@Test
 	public void AddScoredGoalsTest() {
-		Footballer f = new Footballer.Builder("Kowalski")
+		Footballer f = new Footballer.Builder("Kowalski", 24)
 		.name("Jan")
-		.numberOnShirt(24)
 		.assists(11)
 		.scoredGoals(10)
 		.datOfBirth(new GregorianCalendar(1990, 4, 10))
@@ -47,9 +45,8 @@ public class FootballerTest
 	
 	@Test
 	public void AddSAssistsTest() {
-		Footballer f = new Footballer.Builder("Kowalski")
+		Footballer f = new Footballer.Builder("Kowalski", 24)
 		.name("Jan")
-		.numberOnShirt(24)
 		.assists(11)
 		.scoredGoals(10)
 		.datOfBirth(new GregorianCalendar(1990, 4, 10))
@@ -62,9 +59,8 @@ public class FootballerTest
 	@Test
 	public void ResetStatsTest()
 	{
-		Footballer f = new Footballer.Builder("Kowalski")
+		Footballer f = new Footballer.Builder("Kowalski", 24)
 		.name("Jan")
-		.numberOnShirt(24)
 		.assists(11)
 		.scoredGoals(10)
 		.datOfBirth(new GregorianCalendar(1990, 4, 10))
