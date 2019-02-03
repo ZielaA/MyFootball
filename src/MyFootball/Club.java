@@ -1,5 +1,7 @@
 package MyFootball;
 
+import java.util.LinkedList;
+
 public class Club {
 
 	private String name;
@@ -11,6 +13,7 @@ public class Club {
 	private int scoredGoals;
 	private int lostGoals;
 	private int goalDifference;
+	private LinkedList<Match> matches;
 	
 	//Constructor
 	public Club(String name)
@@ -18,6 +21,7 @@ public class Club {
 		this.name = name;
 		footballers = new FootballersRepository();
 		footballers.load("");
+		matches = MatchManager.getInstance().getMatchesForClub(this.name);
 		points = wins * 3 + draws;
 		for(Footballer f: footballers.getAll())
 		{
@@ -83,6 +87,17 @@ public class Club {
 				+ ", draws=" + draws + ", defeats=" + defeats
 				+ ", scoredGoals=" + scoredGoals + ", lostGoals=" + lostGoals
 				+ ", goalDifference=" + goalDifference + "]";
+	}
+	
+	public String matchesInfo()
+	{
+		String s = new String();
+		if(matches.size() == 0) return "";
+		for(Match m: matches)
+		{
+			s += m.info() + "\n";
+		}
+		return s;
 	}
 	
 	

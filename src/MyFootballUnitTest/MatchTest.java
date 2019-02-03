@@ -29,13 +29,13 @@ public class MatchTest {
 	public void setUp() throws Exception {
 		c1 = new Club("FC Barcelona");
 		c2 = new Club("Real Madrit");
-		m1 = new Match(c1, c2, new GregorianCalendar(2019, Calendar.FEBRUARY, 6, 15, 30));
+		m1 = new Match(c1.getName(), c2.getName(), new GregorianCalendar(2019, Calendar.FEBRUARY, 6, 15, 30));
 	}
 
 	@Test
 	public void ConstructorTest() {
-		assertEquals(c1, m1.getHome());
-		assertEquals(c2, m1.getAway());
+		assertEquals("FC Barcelona", m1.getHomeName());
+		assertEquals("Real Madrit", m1.getAwayName());
 		assertEquals(null, m1.getScore());
 		assertNotEquals(0, m1.getId());
 		assertNotNull(m1.getMatchTime());
@@ -60,7 +60,7 @@ public class MatchTest {
 	@Test
 	public void generatingIdTest()
 	{
-		Match m2 = new Match(new Club(""), new Club(""), new GregorianCalendar());
+		Match m2 = new Match("", "", new GregorianCalendar());
 		assertNotEquals(m1.getId(), m2.getId());
 		
 	}

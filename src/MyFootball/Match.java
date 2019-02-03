@@ -5,31 +5,31 @@ import java.util.GregorianCalendar;
 
 public class Match {
 	
-	private Club home;
-	private Club away;
+	private String homeName;
+	private String awayName;
 	private GregorianCalendar matchTime;
 	private long id;
 	private static long nextId = 1;
 	private Score score;
 	
-	public Match(Club home, Club away, GregorianCalendar matchTime)
+	public Match(String homeName, String awayName, GregorianCalendar matchTime)
 	{
 		score = null;
-		this.home = home;
-		this.away = away;
+		this.homeName = homeName;
+		this.awayName = awayName;
 		this.matchTime = matchTime;
 		this.id = nextId;
 		nextId++;
 	}
 	
-	public Club getHome()
+	public String getHomeName()
 	{
-		return home;
+		return homeName;
 	}
 	
-	public Club getAway()
+	public String getAwayName()
 	{
-		return away;
+		return awayName;
 	}
 	
 	public long getId()
@@ -60,7 +60,7 @@ public class Match {
 	public String info()
 	{
 		String s = new String();
-		s += home.getName() + " ";
+		s += homeName + " ";
 		if(score == null)
 		{
 			s += "- : - ";
@@ -69,7 +69,7 @@ public class Match {
 		{
 			s += score.getHomeGoals() + " : " + score.getAwayGoals();
 		}
-		s += away.getName();
+		s += awayName;
 		s +=  "		" + matchTime.get(Calendar.DAY_OF_MONTH) + "/" + (matchTime.get(Calendar.MONTH) + 1) + 
 				"/" + matchTime.get(Calendar.YEAR) + " " + matchTime.get(Calendar.HOUR_OF_DAY) + ":";
 		if(matchTime.get(Calendar.MINUTE) < 10)
