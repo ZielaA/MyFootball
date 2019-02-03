@@ -1,5 +1,8 @@
 package MyFootball;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class TestMain {
 
 	/**
@@ -14,6 +17,14 @@ public class TestMain {
 		
 		Club myClub = new Club("My Club");
 		System.out.println(myClub);
+		
+		Match m1;
+		Club c1;
+		Club c2;
+		c1 = new Club("FC Barcelona");
+		c2 = new Club("Real Madrit");
+		m1 = new Match(c1, c2, new GregorianCalendar(2019, Calendar.FEBRUARY, 6, 15, 30));
+		System.out.println(m1.info());
 
 	}
 

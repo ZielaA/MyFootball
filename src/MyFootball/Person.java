@@ -57,8 +57,9 @@ public class Person {
 			return;
 		}
 		GregorianCalendar now = new GregorianCalendar();
-		age = now.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR) -1 ;
-		if(now.get(Calendar.MONTH) >= dateOfBirth.get(Calendar.MONTH) && now.get(Calendar.DAY_OF_MONTH) >= dateOfBirth.get(Calendar.DAY_OF_MONTH))
+		age = now.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR) -1;
+		GregorianCalendar tmp = new GregorianCalendar(now.get(Calendar.YEAR), dateOfBirth.get(Calendar.MONTH), dateOfBirth.get(Calendar.DAY_OF_MONTH));
+		if(tmp.before(now))
 		{
 			age++;
 		}

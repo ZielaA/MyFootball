@@ -52,7 +52,7 @@ public class PersonTest
 	@Test
 	public void determinAgeTest2()
 	{
-		Person p = new Person("Jan", "Kowalski", new GregorianCalendar(1990, 0, 31));
+		Person p = new Person("Jan", "Kowalski", new GregorianCalendar(1990, Calendar.JANUARY, 31));
 		assertEquals(29, p.getAge());
 	}
 
