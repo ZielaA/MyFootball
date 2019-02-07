@@ -1,6 +1,8 @@
 /**
  * 
  */
+
+
 package MyFootballUnitTest;
 
 import static org.junit.Assert.*;
@@ -19,6 +21,8 @@ import MyFootball.Score;
  * @author adrian
  *
  */
+
+
 public class MatchTest {
 
 	private Match m1;
@@ -48,21 +52,4 @@ public class MatchTest {
 		assertEquals(2, m1.getScore().getHomeGoals());
 		assertEquals(1, m1.getScore().getAwayGoals());
 	}
-	
-	@Test
-	public void SetScore2Test()
-	{
-		m1.setScore(2,1);
-		assertEquals(2, m1.getScore().getHomeGoals());
-		assertEquals(1, m1.getScore().getAwayGoals());
-	}
-	
-	@Test
-	public void generatingIdTest()
-	{
-		Match m2 = new Match("", "", new GregorianCalendar());
-		assertNotEquals(m1.getId(), m2.getId());
-		
-	}
-
 }

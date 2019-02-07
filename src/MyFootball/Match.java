@@ -1,7 +1,12 @@
 package MyFootball;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.management.timer.TimerMBean;
 
 public class Match {
 	
@@ -11,15 +16,16 @@ public class Match {
 	private long id;
 	private static long nextId = 1;
 	private Score score;
+	private Timer timer;
 	
 	public Match(String homeName, String awayName, GregorianCalendar matchTime)
 	{
-		score = null;
 		this.homeName = homeName;
 		this.awayName = awayName;
 		this.matchTime = matchTime;
 		this.id = nextId;
 		nextId++;
+		setTimer();
 	}
 	
 	public String getHomeName()
@@ -45,22 +51,16 @@ public class Match {
 	public Score getScore() {
 		return score;
 	}
-
-	public void setScore(Score score) {
-		if(score == null) score = new Score();
-		this.score = score;
-	}
 	
-	public void setScore(int homeGoals, int awayGoals) {
-		if(score == null) score = new Score();
-		this.score.setHomeGoals(homeGoals);
-		this.score.setAwayGoals(awayGoals);
+	public void setScore(Score score)
+	{
+		this.score = score;
 	}
 	
 	public String info()
 	{
 		String s = new String();
-		s += homeName + " ";
+		s += "Id number: " + id + "		" + homeName + " ";
 		if(score == null)
 		{
 			s += "- : - ";
@@ -69,7 +69,7 @@ public class Match {
 		{
 			s += score.getHomeGoals() + " : " + score.getAwayGoals();
 		}
-		s += awayName;
+		s += " " + awayName;
 		s +=  "		" + matchTime.get(Calendar.DAY_OF_MONTH) + "/" + (matchTime.get(Calendar.MONTH) + 1) + 
 				"/" + matchTime.get(Calendar.YEAR) + " " + matchTime.get(Calendar.HOUR_OF_DAY) + ":";
 		if(matchTime.get(Calendar.MINUTE) < 10)
@@ -85,6 +85,22 @@ public class Match {
 		return s;
 	}
 	
+	private long calculateDateToMiliseconds(GregorianCalendar time)
+	{
+		return matchTime.getTimeInMillis() - new GregorianCalendar().getTimeInMillis();
+	}
 	
-
+	private void setTimer()
+	{
+		if(new GregorianCalendar().before(matchTime))
+		{
+			timer = new Timer();
+			timer.schedule(new TimerTask(){
+				public void run()
+				{
+					MatchManager.getInstance().startMatch(id);
+				}
+			}, calculateDateToMiliseconds(matchTime));
+		}
+	}
 }

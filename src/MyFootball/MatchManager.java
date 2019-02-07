@@ -1,5 +1,6 @@
 package MyFootball;
 
+import java.util.AbstractList;
 import java.util.LinkedList;
 
 public class MatchManager {
@@ -23,9 +24,9 @@ public class MatchManager {
 		return instance;
 	}
 	
-	public LinkedList<Match> getMatchesForClub(String clubName)
+	public AbstractList<Match> getMatchesForClub(String clubName)
 	{
-		LinkedList<Match> l = new LinkedList<Match>();
+		AbstractList<Match> l = new LinkedList<Match>();
 		
 		for(Match m: matches.getAll())
 		{
@@ -36,4 +37,17 @@ public class MatchManager {
 		}
 		return l;
 	}
+
+	public void startMatch(long id)
+	{
+		Match m = matches.get(id);
+		setScore(m, new Score(0, 0));
+		System.out.println(m.info());
+	}
+	
+	private void setScore(Match match, Score score) 
+	{
+		match.setScore(score);
+	}
+	
 }

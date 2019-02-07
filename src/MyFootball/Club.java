@@ -1,6 +1,6 @@
 package MyFootball;
 
-import java.util.LinkedList;
+import java.util.AbstractList;
 
 public class Club {
 
@@ -13,7 +13,7 @@ public class Club {
 	private int scoredGoals;
 	private int lostGoals;
 	private int goalDifference;
-	private LinkedList<Match> matches;
+	private AbstractList<Match> matches;
 	
 	//Constructor
 	public Club(String name)
@@ -80,7 +80,6 @@ public class Club {
 		return s;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Club [name=" + name + ", points=" + points + ", wins=" + wins
@@ -99,7 +98,5 @@ public class Club {
 		}
 		return s;
 	}
-	
-	
 	
 }

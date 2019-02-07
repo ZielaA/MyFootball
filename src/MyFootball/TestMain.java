@@ -27,8 +27,10 @@ public class TestMain {
 		System.out.println(m1.info());
 		*/
 		
-		Club club1 = new Club("Club2");
-		System.out.println(club1.matchesInfo());
+		Club club2 = new Club("Club2");
+		Club club1 = new Club("Club1");
+		System.out.println(club1.playersStats());
+		System.out.println(club1.playersStats());
 
 	}
 
