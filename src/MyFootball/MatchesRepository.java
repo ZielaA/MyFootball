@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.AbstractList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
@@ -11,46 +12,43 @@ import java.util.LinkedList;
 
 public class MatchesRepository implements IRepository<Match, Long> {
 
-	private LinkedList<Match> matches;
+	private AbstractList<Match> matches;
+	private IOoperator<AbstractList<Match>> ioop;
 	
 	
 	public MatchesRepository()
 	{
 		matches = new LinkedList<Match>();
-		try {
-			load("");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+	}
+	
+	public MatchesRepository(IOoperator<AbstractList<Match>> ioop)
+	{
+		matches = new LinkedList<Match>();
+		this.ioop = ioop;
+	}
+	
+	public void load(String path) throws IOException, ClassNotFoundException, NullPointerException {
+		if(ioop != null)
+		{
+			matches = ioop.load(path);
+		}
+		else 
+		{
+			throw new NullPointerException();
 		}
 	}
-	
-	public boolean load(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
-		// TODO Auto-generated method stub
-		
-		matches.add(new Match("Club1", "Club2", new GregorianCalendar(2019, Calendar.FEBRUARY, 8, 20, 07, 0)));
-		matches.add(new Match("Club2", "Club3", new GregorianCalendar(2019, Calendar.FEBRUARY, 8, 20, 07, 10)));
-		matches.add(new Match("Club3", "Club4", new GregorianCalendar()));
-		matches.add(new Match("Club4", "Club1", new GregorianCalendar()));
-	
-		return false;
-	}
 
-	public boolean save(String path) throws IOException
+	public void save(String path) throws IOException, NullPointerException
 	{
-		FileOutputStream fstream = new FileOutputStream("matches.bin");
-		ObjectOutputStream objstream = new ObjectOutputStream(fstream);
-		//System.out.println(getAll());
-		objstream.writeObject(matches);
-		
-		objstream.close();
-		return true;
+		if(ioop != null)
+		{
+			ioop.save(path, matches);
+		}
+		else 
+		{
+			throw new NullPointerException();
+		}
 	}
 
 	public Match get(Long id) {
@@ -64,15 +62,9 @@ public class MatchesRepository implements IRepository<Match, Long> {
 		return null;
 	}
 	
-	public LinkedList<Match> getAll()
+	public AbstractList<Match> getAll()
 	{
 		return matches;
-	}
-	
-	public void setMatches(LinkedList<Match> matches)
-	{
-		this.matches = matches;
-		System.out.println(matches);
 	}
 
 }

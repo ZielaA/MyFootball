@@ -12,7 +12,7 @@ public class MatchManager {
 	
 	private MatchManager()
 	{
-		matches = new MatchesRepository();
+		matches = new MatchesRepository(new BinaryIOoperator<AbstractList<Match>>());
 	}
 	
 	public static MatchManager getInstance()
@@ -54,7 +54,7 @@ public class MatchManager {
 	{
 			if(matches != null)
 			{
-				matches.load("");	
+				matches.load("matches.bin");	
 			}
 	}
 	
@@ -62,14 +62,10 @@ public class MatchManager {
 	{
 			if(matches != null)
 			{
-				matches.save("");	
+				matches.save("matches.bin");	
 			}
 	}
 	
-	public void setRepository(IRepository<Match, Long> repo)
-	{
-		matches = repo;
-	}
 	
 	public AbstractList<Match> getAllMatches()
 	{

@@ -79,7 +79,7 @@ public class TestMain {
 			e.printStackTrace();
 		}*/
 		
-		MatchManager.getInstance().setRepository(new MatchesRepositoryBin());
+		//MatchManager.getInstance().setRepository(new MatchesRepositoryBin());
 		
 		try {
 			MatchManager.getInstance().loadMatches();

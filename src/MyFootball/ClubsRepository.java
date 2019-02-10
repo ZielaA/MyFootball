@@ -13,17 +13,17 @@ public class ClubsRepository implements IRepository<Club, String> {
 		load("");
 	}
 	
-	public boolean load(String path) {
+	public void load(String path) {
 		clubs.add(new Club("club1"));
 		//clubs.add(new Club("club2"));
 		//clubs.add(new Club("club3"));
 		//clubs.add(new Club("club4"));
-		return false;
+		
 	}
 
-	public boolean save(String path) {
+	public void save(String path) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	public Club get(String id) {

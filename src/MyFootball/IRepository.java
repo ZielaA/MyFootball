@@ -13,9 +13,9 @@ import java.util.AbstractList;
  */
 public interface IRepository<T, G>{
 	
-	public boolean load(String path) throws FileNotFoundException, IOException, ClassNotFoundException;
+	public void load(String path) throws FileNotFoundException, IOException, ClassNotFoundException;
 	
-	public boolean save(String path) throws IOException;
+	public void save(String path) throws IOException;
 	
 	public T get(G id);
 	

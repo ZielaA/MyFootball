@@ -16,17 +16,15 @@ public class MatchesRepositoryBin extends MatchesRepository {
 	
 	
 	@Override
-	public boolean load(String path) throws IOException, ClassNotFoundException
+	public void load(String path) throws IOException, ClassNotFoundException
 	{
 		FileInputStream fstream = new FileInputStream("matches.bin");
 		ObjectInputStream objstream = new ObjectInputStream(fstream);
 		LinkedList<Match> m = (LinkedList<Match>) objstream.readObject();
 		System.out.println(m);
-		setMatches(m);
+		//setMatches(m);
 		
 		objstream.close();
-		
-		return true;
 	}
 	
 	

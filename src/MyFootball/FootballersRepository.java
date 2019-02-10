@@ -20,7 +20,7 @@ public class FootballersRepository implements IRepository<Footballer, Integer> {
 		footballers = new LinkedList<Footballer>();
 	}
 	
-	public boolean load(String path) throws FileNotFoundException {
+	public void load(String path) throws FileNotFoundException {
 		/*path = "/home/adrian/java/workspace/MyFootball/data/" + path;
 		Scanner reader = new Scanner(new File(path));
 		
@@ -59,12 +59,11 @@ public class FootballersRepository implements IRepository<Footballer, Integer> {
 		{
 			footballers.add(new Footballer.Builder("Surname" + i, i).name("name"+i).scoredGoals(i).assists(i).build());
 		}
-		return true;
 		
 	}
 
-	public boolean save(String path) {
-		return true;
+	public void save(String path) {
+		;
 	}
 
 	public Footballer get(Integer id) {
