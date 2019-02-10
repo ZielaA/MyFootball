@@ -1,6 +1,14 @@
 package MyFootball;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.lang.ProcessBuilder.Redirect;
+import java.security.KeyStore.Entry.Attribute;
+import java.util.AbstractList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Scanner;
 
 public class FootballersRepository implements IRepository<Footballer, Integer> {
 
@@ -12,7 +20,33 @@ public class FootballersRepository implements IRepository<Footballer, Integer> {
 		footballers = new LinkedList<Footballer>();
 	}
 	
-	public boolean load(String path) {
+	public boolean load(String path) throws FileNotFoundException {
+		/*path = "/home/adrian/java/workspace/MyFootball/data/" + path;
+		Scanner reader = new Scanner(new File(path));
+		
+		//String text = reader.toString();
+		String fData = new String();
+		Map<String, String> attributes = new HashMap<String, String>();
+		while(reader.hasNext())
+		{
+			String line = reader.next();
+			
+			if(line == "#")
+			{
+				attributes[]
+			}
+			else
+			{	
+				String a[] = line.split(":");
+				attributes.put(a[0], a[1]);
+				fData += line;
+			}
+			
+			System.out.println(fData);
+		}
+		reader.close();
+		return true;	
+		*/
 		
 		Goalkeeper gk = (Goalkeeper) new Goalkeeper.GoalkeeperBuilder("Goalkeeper", 1)
 		.lostGoals(13)
@@ -26,6 +60,7 @@ public class FootballersRepository implements IRepository<Footballer, Integer> {
 			footballers.add(new Footballer.Builder("Surname" + i, i).name("name"+i).scoredGoals(i).assists(i).build());
 		}
 		return true;
+		
 	}
 
 	public boolean save(String path) {
@@ -41,7 +76,7 @@ public class FootballersRepository implements IRepository<Footballer, Integer> {
 		return null;
 	}
 
-	public LinkedList<Footballer> getAll()
+	public AbstractList<Footballer> getAll()
 	{
 		return footballers;
 	}

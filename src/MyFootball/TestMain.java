@@ -27,11 +27,14 @@ public class TestMain {
 		System.out.println(m1.info());
 		*/
 		
-		Club club2 = new Club("Club2");
+		/*Club club2 = new Club("Club2");
 		Club club1 = new Club("Club1");
 		System.out.println(club1.playersStats());
 		System.out.println(club1.playersStats());
-
+		*/
+		
+		League l1 = new League("Liga");
+		System.out.println(l1.showLeagueTable());
 	}
 
 }

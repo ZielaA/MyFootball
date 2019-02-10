@@ -1,11 +1,12 @@
 package MyFootball;
 
+import java.io.FileNotFoundException;
 import java.util.AbstractList;
 
 public class Club {
 
 	private String name;
-	private FootballersRepository footballers;
+	private IRepository<Footballer, Integer> footballers;
 	private int points;
 	private int wins;
 	private int draws;
@@ -20,7 +21,12 @@ public class Club {
 	{
 		this.name = name;
 		footballers = new FootballersRepository();
-		footballers.load("");
+		try {
+			footballers.load(this.name);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		matches = MatchManager.getInstance().getMatchesForClub(this.name);
 		points = wins * 3 + draws;
 		for(Footballer f: footballers.getAll())
@@ -98,5 +104,4 @@ public class Club {
 		}
 		return s;
 	}
-	
 }

@@ -1,17 +1,23 @@
 package MyFootball;
 
+import java.io.FileNotFoundException;
 import java.util.AbstractList;
 import java.util.LinkedList;
 
 public class MatchManager {
 
-	private MatchesRepository matches;
+	private IRepository<Match, Long> matches;
 	private static MatchManager instance = null;
 	
 	private MatchManager()
 	{
 		matches = new MatchesRepository();
-		matches.load("");
+		try {
+			matches.load("");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
