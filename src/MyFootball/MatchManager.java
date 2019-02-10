@@ -1,6 +1,7 @@
 package MyFootball;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.AbstractList;
 import java.util.LinkedList;
 
@@ -12,13 +13,6 @@ public class MatchManager {
 	private MatchManager()
 	{
 		matches = new MatchesRepository();
-		try {
-			matches.load("");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 	
 	public static MatchManager getInstance()
@@ -54,6 +48,36 @@ public class MatchManager {
 	private void setScore(Match match, Score score) 
 	{
 		match.setScore(score);
+	}
+	
+	public void loadMatches() throws FileNotFoundException, IOException, ClassNotFoundException
+	{
+			if(matches != null)
+			{
+				matches.load("");	
+			}
+	}
+	
+	public void saveMatches() throws FileNotFoundException, IOException
+	{
+			if(matches != null)
+			{
+				matches.save("");	
+			}
+	}
+	
+	public void setRepository(IRepository<Match, Long> repo)
+	{
+		matches = repo;
+	}
+	
+	public AbstractList<Match> getAllMatches()
+	{
+		if(matches != null)
+		{
+			return matches.getAll();
+		}
+		else return null;
 	}
 	
 }

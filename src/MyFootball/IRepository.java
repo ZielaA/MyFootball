@@ -4,6 +4,7 @@
 package MyFootball;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.AbstractList;
 
 /**
@@ -12,9 +13,9 @@ import java.util.AbstractList;
  */
 public interface IRepository<T, G>{
 	
-	public boolean load(String path) throws FileNotFoundException;
+	public boolean load(String path) throws FileNotFoundException, IOException, ClassNotFoundException;
 	
-	public boolean save(String path);
+	public boolean save(String path) throws IOException;
 	
 	public T get(G id);
 	

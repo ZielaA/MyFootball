@@ -1,9 +1,11 @@
 package MyFootball;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.AbstractList;
 
-public class Club {
+public class Club implements Serializable{
 
 	private String name;
 	private IRepository<Footballer, Integer> footballers;
@@ -26,7 +28,14 @@ public class Club {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		matches = MatchManager.getInstance().getMatchesForClub(this.name);
 		points = wins * 3 + draws;
 		for(Footballer f: footballers.getAll())

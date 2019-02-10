@@ -1,4 +1,8 @@
 package MyFootball;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
@@ -13,9 +17,21 @@ public class MatchesRepository implements IRepository<Match, Long> {
 	public MatchesRepository()
 	{
 		matches = new LinkedList<Match>();
+		try {
+			load("");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public boolean load(String path) {
+	public boolean load(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		
 		matches.add(new Match("Club1", "Club2", new GregorianCalendar(2019, Calendar.FEBRUARY, 8, 20, 07, 0)));
@@ -26,9 +42,15 @@ public class MatchesRepository implements IRepository<Match, Long> {
 		return false;
 	}
 
-	public boolean save(String path) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean save(String path) throws IOException
+	{
+		FileOutputStream fstream = new FileOutputStream("matches.bin");
+		ObjectOutputStream objstream = new ObjectOutputStream(fstream);
+		//System.out.println(getAll());
+		objstream.writeObject(matches);
+		
+		objstream.close();
+		return true;
 	}
 
 	public Match get(Long id) {
@@ -45,6 +67,12 @@ public class MatchesRepository implements IRepository<Match, Long> {
 	public LinkedList<Match> getAll()
 	{
 		return matches;
+	}
+	
+	public void setMatches(LinkedList<Match> matches)
+	{
+		this.matches = matches;
+		System.out.println(matches);
 	}
 
 }

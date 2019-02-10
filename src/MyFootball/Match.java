@@ -1,11 +1,13 @@
 package MyFootball;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Match {
+public class Match implements Serializable
+{
 	
 	private String homeName;
 	private String awayName;
