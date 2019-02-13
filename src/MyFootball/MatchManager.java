@@ -12,7 +12,7 @@ public class MatchManager {
 	
 	private MatchManager()
 	{
-		matches = new MatchesRepository(new BinaryIOoperator<AbstractList<Match>>());
+		matches = new MatchesRepository(new BinaryIOoperator<Match>());
 	}
 	
 	public static MatchManager getInstance()

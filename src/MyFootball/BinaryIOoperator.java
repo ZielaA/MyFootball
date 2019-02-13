@@ -6,24 +6,26 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.AbstractList;
 
-public class BinaryIOoperator<T> implements IOoperator<T> {
+public class BinaryIOoperator<T extends Serializable> implements IOoperator<T> {
 
 
-	public T load(String path) throws IOException, ClassNotFoundException
+	public AbstractList<T> loadCollection(String path) throws IOException, ClassNotFoundException
 	{
 		FileInputStream fstream = new FileInputStream(path);
 		ObjectInputStream objstream = new ObjectInputStream(fstream);
-		T container = (T) objstream.readObject();
+		AbstractList<T> collection = (AbstractList<T>) objstream.readObject();
 		//System.out.println(m);
 		objstream.close();
-		return container;
+		return collection;
 	}
 
-	public void save(String path, T t) throws FileNotFoundException, IOException {
+	public void saveCollection(String path, AbstractList<T> collection) throws FileNotFoundException, IOException {
 		FileOutputStream fstream = new FileOutputStream(path);
 		ObjectOutputStream objstream = new ObjectOutputStream(fstream);
-		objstream.writeObject(t);
+		objstream.writeObject(collection);
 		objstream.close();
 	}
 

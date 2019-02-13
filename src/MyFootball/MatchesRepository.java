@@ -13,16 +13,16 @@ import java.util.LinkedList;
 public class MatchesRepository implements IRepository<Match, Long> {
 
 	private AbstractList<Match> matches;
-	private IOoperator<AbstractList<Match>> ioop;
+	private IOoperator<Match> ioop;
 	
 	
-	public MatchesRepository()
+	/*public MatchesRepository()
 	{
 		matches = new LinkedList<Match>();
 		
-	}
+	}*/
 	
-	public MatchesRepository(IOoperator<AbstractList<Match>> ioop)
+	public MatchesRepository(IOoperator<Match> ioop)
 	{
 		matches = new LinkedList<Match>();
 		this.ioop = ioop;
@@ -31,7 +31,7 @@ public class MatchesRepository implements IRepository<Match, Long> {
 	public void load(String path) throws IOException, ClassNotFoundException, NullPointerException {
 		if(ioop != null)
 		{
-			matches = ioop.load(path);
+			matches = ioop.loadCollection(path);
 		}
 		else 
 		{
@@ -43,7 +43,7 @@ public class MatchesRepository implements IRepository<Match, Long> {
 	{
 		if(ioop != null)
 		{
-			ioop.save(path, matches);
+			ioop.saveCollection(path, matches);
 		}
 		else 
 		{

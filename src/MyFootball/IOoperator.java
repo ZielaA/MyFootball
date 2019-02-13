@@ -2,9 +2,10 @@ package MyFootball;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.AbstractList;
 
 public interface IOoperator<T> {
 
-	public T load(String path) throws IOException, ClassNotFoundException;
-	public void save(String path, T t) throws FileNotFoundException, IOException;
+	public AbstractList<T> loadCollection(String path) throws IOException, ClassNotFoundException;
+	public void saveCollection(String path, AbstractList<T> collection) throws FileNotFoundException, IOException;
 }
