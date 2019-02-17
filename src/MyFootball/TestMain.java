@@ -1,15 +1,8 @@
 package MyFootball;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.AbstractList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.LinkedList;
 
 public class TestMain {
 
@@ -94,51 +87,28 @@ public class TestMain {
 			e.printStackTrace();
 		}
 		AbstractList<Match> matches2 = MatchManager.getInstance().getAllMatches();
+		//System.out.print(matches2.size());
 		for(Match m: matches2)
 		{
-			System.out.println(m.info());
+			System.out.println(m.getHomeName() + "a");
 		}
 		
 		
-		/*MatchManager.getInstance().setRepository(new MatchesRepository());
-		try {
-			MatchManager.getInstance().loadMatches();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		League league = new League("Moja_liga");
+		System.out.println("\n\n");
+		//league.save();
+		for(Club c: league.getAllClubs())
+		{
+			System.out.println(c.matchesInfo());
+			/*if(c.getName() == matches2.get(0).getHomeName());
+			{
+				System.out.print("a");
+			}*/
 		}
-		AbstractList<Match> matches = MatchManager.getInstance().getAllMatches();
-		
-		for(Match m: matches)
+		//System.out.println("dadad");
+		for(Match m:  MatchManager.getInstance().getAllMatches())
 		{
 			System.out.println(m.info());
 		}
-		
-		
-		FileOutputStream fstream = new FileOutputStream("matches2.bin");
-		ObjectOutputStream objstream = new ObjectOutputStream(fstream);
-		
-		objstream.writeObject(matches);
-		
-		objstream.close();
-		
-		FileInputStream fstream2 = new FileInputStream("matches2.bin");
-		ObjectInputStream objstream2 = new ObjectInputStream(fstream2);
-		matches = (LinkedList<Match>) objstream2.readObject();
-		
-		objstream.close();
-		
-		for(Match m: matches)
-		{
-			System.out.println(m.info());
-		}*/
-		
 	}
-
 }

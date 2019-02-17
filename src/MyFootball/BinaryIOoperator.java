@@ -12,7 +12,7 @@ import java.util.AbstractList;
 public class BinaryIOoperator<T extends Serializable> implements IOoperator<T> {
 
 
-	public AbstractList<T> loadCollection(String path) throws IOException, ClassNotFoundException
+	public AbstractList<T> loadCollection(String path, Factory<T> f) throws IOException, ClassNotFoundException
 	{
 		FileInputStream fstream = new FileInputStream(path);
 		ObjectInputStream objstream = new ObjectInputStream(fstream);

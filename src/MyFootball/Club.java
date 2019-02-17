@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.AbstractList;
 
-public class Club implements Serializable{
+public class Club implements Serializable, ITextFileOutput{
 
-	private String name;
+	final private String name;
 	private IRepository<Footballer, Integer> footballers;
 	private int points;
 	private int wins;
@@ -106,11 +106,16 @@ public class Club implements Serializable{
 	public String matchesInfo()
 	{
 		String s = new String();
-		if(matches.size() == 0) return "";
+		if(matches.size() == 0) return "blabla";
 		for(Match m: matches)
 		{
 			s += m.info() + "\n";
 		}
 		return s;
 	}
+
+	public String textToSaveInFile() {
+		return getName();
+	}
+
 }

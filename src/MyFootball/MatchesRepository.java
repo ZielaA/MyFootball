@@ -1,11 +1,6 @@
 package MyFootball;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.AbstractList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 
@@ -31,7 +26,7 @@ public class MatchesRepository implements IRepository<Match, Long> {
 	public void load(String path) throws IOException, ClassNotFoundException, NullPointerException {
 		if(ioop != null)
 		{
-			matches = ioop.loadCollection(path);
+			matches = ioop.loadCollection(path, null);
 		}
 		else 
 		{

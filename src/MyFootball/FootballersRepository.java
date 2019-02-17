@@ -1,14 +1,8 @@
 package MyFootball;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.ProcessBuilder.Redirect;
-import java.security.KeyStore.Entry.Attribute;
 import java.util.AbstractList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.Scanner;
 
 public class FootballersRepository implements IRepository<Footballer, Integer> {
 
