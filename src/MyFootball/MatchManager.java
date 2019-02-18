@@ -42,7 +42,6 @@ public class MatchManager {
 	{
 		Match m = matches.get(id);
 		setScore(m, new Score(0, 0));
-		System.out.println(m.info());
 	}
 	
 	private void setScore(Match match, Score score) 
@@ -57,6 +56,7 @@ public class MatchManager {
 				matches.load("matches.bin");	
 			}
 	}
+
 	
 	public void saveMatches() throws FileNotFoundException, IOException
 	{
@@ -75,5 +75,11 @@ public class MatchManager {
 		}
 		else return null;
 	}
+	
+	public void setMatches(IRepository<Match, Long> matches)
+	{
+		this.matches = matches;
+	}
+	
 	
 }

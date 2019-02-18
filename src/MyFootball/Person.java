@@ -1,13 +1,14 @@
 package MyFootball;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Person {
+public class Person implements Serializable{
 
 	private final String name;
 	private final String surname;
-	private int age;
+	transient private int age;
 	private final GregorianCalendar dateOfBirth;
 	
 	// getters and setters

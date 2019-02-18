@@ -31,9 +31,9 @@ public class MatchTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		c1 = new Club("FC Barcelona");
-		c2 = new Club("Real Madrit");
-		m1 = new Match(c1.getName(), c2.getName(), new GregorianCalendar(2019, Calendar.FEBRUARY, 6, 15, 30));
+		/*c1 = new Club("FC Barcelona");
+		c2 = new Club("Real Madrit");*/
+		m1 = new Match("FC Barcelona", "Real Madrit", new GregorianCalendar(2019, Calendar.FEBRUARY, 6, 15, 30));
 	}
 
 	@Test

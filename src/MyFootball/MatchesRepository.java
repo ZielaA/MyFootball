@@ -23,17 +23,27 @@ public class MatchesRepository implements IRepository<Match, Long> {
 		this.ioop = ioop;
 	}
 	
+	public MatchesRepository(AbstractList<Match> matches)
+	{
+		this.matches = matches;
+	}
+	
 	public void load(String path) throws IOException, ClassNotFoundException, NullPointerException {
 		if(ioop != null)
 		{
 			matches = ioop.loadCollection(path, null);
 		}
 		else 
-		{
-			throw new NullPointerException();
+		{	
+			if(matches == null)
+			{
+				throw new NullPointerException();
+			}
+			
 		}
 	}
 
+	
 	public void save(String path) throws IOException, NullPointerException
 	{
 		if(ioop != null)
