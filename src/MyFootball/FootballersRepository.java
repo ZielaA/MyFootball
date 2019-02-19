@@ -1,63 +1,50 @@
 package MyFootball;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.AbstractList;
 import java.util.LinkedList;
 
 public class FootballersRepository implements IRepository<Footballer, Integer> {
 
-	private LinkedList<Footballer> footballers;
+	private AbstractList<Footballer> footballers;
+	private IOoperator<Footballer> ioop;
 	
 	
-	public FootballersRepository()
+	public FootballersRepository(IOoperator<Footballer> ioop)
 	{
 		footballers = new LinkedList<Footballer>();
+		this.ioop = ioop; 
 	}
 	
 	public void load(String path) throws FileNotFoundException {
-		/*path = "/home/adrian/java/workspace/MyFootball/data/" + path;
-		Scanner reader = new Scanner(new File(path));
-		
-		//String text = reader.toString();
-		String fData = new String();
-		Map<String, String> attributes = new HashMap<String, String>();
-		while(reader.hasNext())
-		{
-			String line = reader.next();
-			
-			if(line == "#")
-			{
-				attributes[]
-			}
-			else
-			{	
-				String a[] = line.split(":");
-				attributes.put(a[0], a[1]);
-				fData += line;
-			}
-			
-			System.out.println(fData);
+		try {
+			footballers = ioop.loadCollection(path, null);
+		} catch (ClassNotFoundException | IOException e) {
+			Goalkeeper gk = (Goalkeeper) new Goalkeeper.GoalkeeperBuilder("Goalkeeper", 1)
+					.lostGoals(13)
+					.cleanSheets(3)
+					.name("name1")
+					.assists(1)
+					.build();
+					footballers.add(gk);
+					for(int i=2; i<=11; i++)
+					{
+						footballers.add(new Footballer.Builder("Surname" + i, i).name("name"+i).scoredGoals(i).assists(i).build());
+					}
 		}
-		reader.close();
-		return true;	
-		*/
 		
-		Goalkeeper gk = (Goalkeeper) new Goalkeeper.GoalkeeperBuilder("Goalkeeper", 1)
-		.lostGoals(13)
-		.cleanSheets(3)
-		.name("name1")
-		.assists(1)
-		.build();
-		footballers.add(gk);
-		for(int i=2; i<=11; i++)
-		{
-			footballers.add(new Footballer.Builder("Surname" + i, i).name("name"+i).scoredGoals(i).assists(i).build());
-		}
+		
 		
 	}
 
 	public void save(String path) {
-		;
+		try {
+			ioop.saveCollection(path, footballers);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Footballer get(Integer id) {

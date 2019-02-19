@@ -1,6 +1,5 @@
 package MyFootball;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.AbstractList;
@@ -17,36 +16,18 @@ public class Club implements Serializable, ITextFileOutput {
 	private int lostGoals;
 	private int goalDifference;
 	private AbstractList<Match> matches;
-
-	// Constructor
-	/*public Club(String name) {
-		this.name = name;
-		footballers = new FootballersRepository();
-		try {
-			footballers.load(this.name);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		matches = MatchManager.getInstance().getMatchesForClub(this.name);
-
-		calculateStatsFromMatches();
-
-		goalDifference = scoredGoals - lostGoals;
-		points = wins * 3 + draws;
-
-	}*/
+	private String footballersPath;
 
 	public Club(String name, AbstractList<Match> matches) {
 		this.name = name;
 		this.matches = matches;
+		footballersPath = this.name + ".bin";
+		footballers = new FootballersRepository(new BinaryIOoperator<Footballer>());
+		try {
+			footballers.load(footballersPath);
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
 		calculateStatsFromMatches();
 		goalDifference = scoredGoals - lostGoals;
 		points = wins * 3 + draws;
@@ -156,4 +137,13 @@ public class Club implements Serializable, ITextFileOutput {
 		return getName();
 	}
 
+	public void saveFootballers()
+	{
+		try {
+			footballers.save(footballersPath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
