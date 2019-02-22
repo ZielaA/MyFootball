@@ -26,6 +26,7 @@ public class MatchesRepository implements IRepository<Match, Long> {
 	public MatchesRepository(AbstractList<Match> matches)
 	{
 		this.matches = matches;
+		this.ioop = new BinaryIOoperator<Match>();
 	}
 	
 	public void load(String path) throws IOException, ClassNotFoundException, NullPointerException {

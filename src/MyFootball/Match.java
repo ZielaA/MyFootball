@@ -102,4 +102,13 @@ public class Match implements Serializable
 			}, calculateDateToMiliseconds(matchTime));
 		}
 	}
+	
+	public boolean involvesClub(String clubName)
+	{
+		if(homeName == clubName || awayName == clubName)
+		{
+			return true;
+		}
+		else return false;
+	}
 }

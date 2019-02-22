@@ -8,19 +8,21 @@ import java.util.LinkedList;
 public class MatchManager {
 
 	private IRepository<Match, Long> matches;
-	private static MatchManager instance = null;
+	private static MatchManager instance = new MatchManager();
 	
 	private MatchManager()
 	{
 		matches = new MatchesRepository(new BinaryIOoperator<Match>());
+		try {
+			loadMatches();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static MatchManager getInstance()
 	{
-		if(instance == null)
-		{
-			instance = new MatchManager();
-		}
 		return instance;
 	}
 	
@@ -30,11 +32,12 @@ public class MatchManager {
 		
 		for(Match m: matches.getAll())
 		{
-			if(m.getHomeName() == clubName || m.getAwayName() == clubName)
+			if(m.getHomeName().equals(clubName) || m.getAwayName().equals(clubName))
 			{
 				l.add(m);
 			}
 		}
+		System.out.println(getAllMatches().size());
 		return l;
 	}
 
@@ -42,6 +45,13 @@ public class MatchManager {
 	{
 		Match m = matches.get(id);
 		setScore(m, new Score(0, 0));
+		//System.out.println(m.getHomeName() + "t");
+		
+		if(User.getInstance().isClubFavourite(m.getHomeName()) == true || 
+		   User.getInstance().isClubFavourite(m.getAwayName()) == true)
+		{
+			User.getInstance().notify("Match started: " + m.info());
+		}
 	}
 	
 	private void setScore(Match match, Score score) 
@@ -49,11 +59,12 @@ public class MatchManager {
 		match.setScore(score);
 	}
 	
+	
 	public void loadMatches() throws FileNotFoundException, IOException, ClassNotFoundException
 	{
 			if(matches != null)
 			{
-				matches.load("matches.bin");	
+				matches.load("matches3.bin");	
 			}
 	}
 
@@ -62,7 +73,7 @@ public class MatchManager {
 	{
 			if(matches != null)
 			{
-				matches.save("matches.bin");	
+				matches.save("matches3.bin");	
 			}
 	}
 	

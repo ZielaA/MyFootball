@@ -2,7 +2,13 @@ package MyFootball;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.AbstractList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.LinkedList;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 public class TestMain {
 
@@ -111,9 +117,59 @@ public class TestMain {
 //			System.out.println(m.info());
 //		}
 		
-		Club club2 = new ClubFactory().create("club2");
+		/*Club club2 = new ClubFactory().create("club2");
 		System.out.println(club2.playersStats());
 		System.out.println(club2.matchesInfo());
-		club2.saveFootballers();
+		club2.saveFootballers();*/
+		
+		/*Club c1 = new ClubFactory().create("club1");
+		Club c2 = new ClubFactory().create("club2");
+		User user = User.getInstance();
+		user.addFavouriteClub(c1.getName());
+		user.addFavouriteClub(c2.getName());
+		MatchManager mm = MatchManager.getInstance();
+		LinkedList<Match> matches = new LinkedList<Match>();
+		GregorianCalendar matchTime = new GregorianCalendar();
+		matchTime.add(Calendar.SECOND, 1);
+		matches.add(new Match(c1.getName(), c2.getName(), matchTime));
+		matches.add(new Match("club1", "club3", new GregorianCalendar()));
+		matches.add(new Match("club4", "club1", matchTime));
+		matches.add(new Match("club3", "club5", new GregorianCalendar()));
+		matches.add(new Match("club1", "club2", new GregorianCalendar()));
+		mm.setMatches(new MatchesRepository(matches));
+		
+		
+		
+		for(Match m: mm.getAllMatches())
+		{
+			System.out.println(m.info());
+		}
+		
+		try {
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+
+		
+		for(Match m: mm.getAllMatches())
+		{
+			System.out.println(m.info());
+		}*/
+		
+		//MatchManager.getInstance().loadMatches();
+		System.out.print(MatchManager.getInstance().getAllMatches().size());
+		League l1 = new League("Moja_liga");
+		for(Club c: l1.getAllClubs())
+		{
+			System.out.println(c.matchesInfo());
+		}
+		for(Match m: MatchManager.getInstance().getAllMatches())
+		{
+			System.out.println(m.info());
+		}
+		
+		MatchManager.getInstance().saveMatches();
 	}
 }
