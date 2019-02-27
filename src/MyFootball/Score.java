@@ -1,6 +1,8 @@
 package MyFootball;
 
-public class Score
+import java.io.Serializable;
+
+public class Score implements Serializable
 {
 	private int homeGoals;
 	private int awayGoals;
@@ -33,5 +35,10 @@ public class Score
 
 	public void setAwayGoals(int awayGoals) {
 		this.awayGoals = awayGoals;
+	}
+
+	@Override
+	public String toString() {
+		return homeGoals + ":" + awayGoals;
 	}
 }

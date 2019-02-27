@@ -3,7 +3,12 @@ package MyFootball;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.AbstractList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
+
+import HTMLParser.HtmlScoreReader;
 
 public class MatchManager {
 
@@ -19,6 +24,9 @@ public class MatchManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		determinMatchesRound();
+		getScoresForPastMatches();
 	}
 	
 	public static MatchManager getInstance()
@@ -106,6 +114,45 @@ public class MatchManager {
 	public void removeMatch(long id)
 	{
 		matches.remove(id);
+	}
+	
+	public Match getMatch(long id)
+	{
+		return matches.get(id);
+	}
+	
+	private void determinMatchesRound()
+	{
+		
+		LinkedList<String> doneClubs = new LinkedList<String>();
+		for(Match m: getAllMatches())
+		{
+			String club = m.getHomeName();
+			if(!doneClubs.contains(club))
+			{
+				doneClubs.add(club);
+				AbstractList<Match> mm = getMatchesForClub(club);
+				Collections.sort(mm);
+				for(int i=0; i<mm.size(); i++)
+				{
+					mm.get(i).setRoundNumber(i+1);
+				}
+			}
+			
+		}
+	}
+	
+	private void getScoresForPastMatches()
+	{
+		
+		for(Match m: getAllMatches())
+		{
+			HtmlScoreReader sr = new HtmlScoreReader("http://www.sport.pl/pilka/2,116928,,,,178633894,P_SPORT_SLOWNIK.html#wyniki");
+			if(m.getScore() == null && m.getMatchTime().before(new GregorianCalendar()))
+			{
+				m.setScore(sr.getScore(m));
+			}
+		}
 	}
 	
 	

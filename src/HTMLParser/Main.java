@@ -55,8 +55,8 @@ public class Main {
 		}*/
 		
 		HtmlScoreReader rd = new HtmlScoreReader("http://www.sport.pl/pilka/2,116928,,,,178633894,P_SPORT_SLOWNIK.html#wyniki");
-		System.out.println(rd.getScore(MatchManager.getInstance().getAllMatches().get(0)));
-		
+		System.out.println(rd.getScore(MatchManager.getInstance().getMatch(9)));
+		System.out.println(MatchManager.getInstance().getMatch(9).info());
 	}
 
 }

@@ -1,6 +1,7 @@
 package MyFootball;
 import java.io.IOException;
 import java.util.AbstractList;
+import java.util.Collections;
 import java.util.LinkedList;
 
 
@@ -33,6 +34,7 @@ public class MatchesRepository implements IRepository<Match, Long> {
 		if(ioop != null)
 		{
 			matches = ioop.loadCollection(path, null);
+			Collections.sort(matches);
 		}
 		else 
 		{	
@@ -87,7 +89,6 @@ public class MatchesRepository implements IRepository<Match, Long> {
 			matches.remove(index);
 		}
 		else throw new IllegalArgumentException();
-		
 	}
 
 }

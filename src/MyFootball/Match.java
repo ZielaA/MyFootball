@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Match implements Serializable
+public class Match implements Serializable, Comparable<Match>
 {
 	
 	private String homeName;
@@ -14,8 +14,8 @@ public class Match implements Serializable
 	private GregorianCalendar matchTime;
 	private long id;
 	private static long nextId = 1;
-	private Score score;
-	private Timer timer;
+	transient private Score score;
+	transient private Timer timer;
 	private int roundNumber;
 	
 	public Match(String homeName, String awayName, GregorianCalendar matchTime)
@@ -59,13 +59,19 @@ public class Match implements Serializable
 	
 	public int getRoundNumber()
 	{
-		return 7;
+		return roundNumber;
+	}
+	
+	public void setRoundNumber(int roundNumber)
+	{
+		this.roundNumber = roundNumber;
 	}
 	
 	public String info()
 	{
 		String s = new String();
-		s += "Id number: " + id + "		" + homeName + " ";
+		s += "Kolejka " + roundNumber; 
+		s += "	Id number: " + id + "		" + homeName + " ";
 		if(score == null)
 		{
 			s += "- : - ";
@@ -116,5 +122,12 @@ public class Match implements Serializable
 			return true;
 		}
 		else return false;
+	}
+
+	@Override
+	public int compareTo(Match o) {
+		if(this.matchTime.before(o.getMatchTime())) return -1;
+		else if(this.matchTime.after(o.getMatchTime())) return 1;
+		else return 0;
 	}
 }

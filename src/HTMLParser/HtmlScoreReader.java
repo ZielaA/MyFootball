@@ -70,7 +70,6 @@ public class HtmlScoreReader {
 			{
 				score1 = Jsoup.parse(html).select("span.score > span.score1").first().text();
 				score2 = Jsoup.parse(html).select("span.score > span.score2").first().text();
-				//System.out.println(e1);
 			}
 		}
 		return score1 + ":" + score2;
@@ -79,6 +78,7 @@ public class HtmlScoreReader {
 	public Score getScore(Match match)
 	{
 		String [] t = getTextScore(match).split(":");
+		//System.out.println(t[0] + ": " + t[1]);
 		int score1 = Integer.parseInt(t[0]);
 		int score2 = Integer.parseInt(t[1]);
 		
