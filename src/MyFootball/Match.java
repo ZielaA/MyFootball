@@ -16,6 +16,7 @@ public class Match implements Serializable
 	private static long nextId = 1;
 	private Score score;
 	private Timer timer;
+	private int roundNumber;
 	
 	public Match(String homeName, String awayName, GregorianCalendar matchTime)
 	{
@@ -54,6 +55,11 @@ public class Match implements Serializable
 	public void setScore(Score score)
 	{
 		this.score = score;
+	}
+	
+	public int getRoundNumber()
+	{
+		return 7;
 	}
 	
 	public String info()

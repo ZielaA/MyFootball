@@ -99,7 +99,8 @@ public class MatchManager {
 	
 	public long lastId()
 	{
-		return getAllMatches().get(getAllMatches().size()-1).getId();
+		if(getAllMatches().size() == 0) return 0;
+		else return getAllMatches().get(getAllMatches().size()-1).getId();
 	}
 	
 	public void removeMatch(long id)
