@@ -60,4 +60,16 @@ public class FootballersRepository implements IRepository<Footballer, Integer> {
 	{
 		return footballers;
 	}
+
+	@Override
+	public void add(Footballer e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
 }

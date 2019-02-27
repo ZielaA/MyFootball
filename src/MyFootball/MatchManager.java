@@ -92,5 +92,20 @@ public class MatchManager {
 		this.matches = matches;
 	}
 	
+	public void addMatch(Match match)
+	{
+		matches.add(match);
+	}
+	
+	public long lastId()
+	{
+		return getAllMatches().get(getAllMatches().size()-1).getId();
+	}
+	
+	public void removeMatch(long id)
+	{
+		matches.remove(id);
+	}
+	
 	
 }

@@ -72,5 +72,22 @@ public class MatchesRepository implements IRepository<Match, Long> {
 	{
 		return matches;
 	}
+	
+	public void add(Match m)
+	{
+		matches.add(m);
+	}
+
+	@Override
+	public void remove(Long id) {
+		Match m = get(id);
+		int index = matches.indexOf(m);
+		if(index != -1)
+		{
+			matches.remove(index);
+		}
+		else throw new IllegalArgumentException();
+		
+	}
 
 }

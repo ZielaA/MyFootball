@@ -20,5 +20,9 @@ public interface IRepository<T, G>{
 	public T get(G id);
 	
 	public AbstractList<T> getAll();
+	
+	public void add(T e);
+	
+	public void remove(G id);
 
 }

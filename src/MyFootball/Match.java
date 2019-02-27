@@ -22,8 +22,8 @@ public class Match implements Serializable
 		this.homeName = homeName;
 		this.awayName = awayName;
 		this.matchTime = matchTime;
-		this.id = nextId;
-		nextId++;
+		this.id = MatchManager.getInstance().lastId() + 1;
+		//nextId++;
 		setTimer();
 	}
 	

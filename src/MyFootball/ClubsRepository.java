@@ -47,6 +47,18 @@ public class ClubsRepository implements IRepository<Club, String> {
 		return clubs;
 	}
 
+	@Override
+	public void add(Club e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 }
