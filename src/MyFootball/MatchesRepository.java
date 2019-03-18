@@ -12,12 +12,6 @@ public class MatchesRepository implements IRepository<Match, Long> {
 	private IOoperator<Match> ioop;
 	
 	
-	/*public MatchesRepository()
-	{
-		matches = new LinkedList<Match>();
-		
-	}*/
-	
 	public MatchesRepository(IOoperator<Match> ioop)
 	{
 		matches = new LinkedList<Match>();
@@ -35,6 +29,11 @@ public class MatchesRepository implements IRepository<Match, Long> {
 		{
 			matches = ioop.loadCollection(path, null);
 			Collections.sort(matches);
+			
+			for(Match m: matches)
+			{
+				m.initialize();
+			}
 		}
 		else 
 		{	

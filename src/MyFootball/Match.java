@@ -6,6 +6,8 @@ import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import HTMLParser.HtmlScoreReader;
+
 public class Match implements Serializable, Comparable<Match>
 {
 	
@@ -14,9 +16,11 @@ public class Match implements Serializable, Comparable<Match>
 	private GregorianCalendar matchTime;
 	private long id;
 	private static long nextId = 1;
-	transient private Score score;
+	private Score score;
 	transient private Timer timer;
 	private int roundNumber;
+	transient private HtmlScoreReader scoreReader;
+	
 	
 	public Match(String homeName, String awayName, GregorianCalendar matchTime)
 	{
@@ -24,7 +28,11 @@ public class Match implements Serializable, Comparable<Match>
 		this.awayName = awayName;
 		this.matchTime = matchTime;
 		this.id = MatchManager.getInstance().lastId() + 1;
-		//nextId++;
+		setTimer();
+	}
+	
+	public void initialize()
+	{
 		setTimer();
 	}
 	
@@ -129,5 +137,13 @@ public class Match implements Serializable, Comparable<Match>
 		if(this.matchTime.before(o.getMatchTime())) return -1;
 		else if(this.matchTime.after(o.getMatchTime())) return 1;
 		else return 0;
+	}
+
+	public HtmlScoreReader getScoreReader() {
+		return scoreReader;
+	}
+
+	public void setScoreReader(HtmlScoreReader scoreReader) {
+		this.scoreReader = scoreReader;
 	}
 }

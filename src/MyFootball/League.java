@@ -4,11 +4,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.AbstractList;
 
+import HTMLParser.HtmlScoreReader;
+
 public class League {
 
 	private String leguaName;
 	private IRepository<Club, String> clubsRepo;
-	public League(String leagueName)
+	private HtmlScoreReader scoreReader;
+	
+	public League(String leagueName, String url)
 	{
 		this.leguaName = leagueName;
 		clubsRepo = new ClubsRepository(new TextIOoperator<Club>());
@@ -21,6 +25,8 @@ public class League {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		scoreReader = new HtmlScoreReader(url);
 	}
 	
 	public String getLeagueName()
@@ -52,6 +58,25 @@ public class League {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	public HtmlScoreReader getScoreReader()
+	{
+		return scoreReader;
+	}
+	
+	private void setScoreReaderForMatches()
+	{
+		for(Club c: clubsRepo.getAll())
+		{
+			for(Match m: c.getMatches())
+			{
+				if(m.getScoreReader() != null)
+				{
+					m.setScoreReader(this.scoreReader);
+				}
+			}
 		}
 	}
 }

@@ -159,17 +159,20 @@ public class TestMain {
 		}*/
 		
 		//MatchManager.getInstance().loadMatches();
-		System.out.print(MatchManager.getInstance().getAllMatches().size());
-		League l1 = new League("Moja_liga");
+		League l1 = new League("Serie_A", "http://www.sport.pl/pilka/2,116928,,,,178633894,P_SPORT_SLOWNIK.html");
 		for(Club c: l1.getAllClubs())
 		{
 			System.out.println(c.matchesInfo());
 		}
 		for(Match m: MatchManager.getInstance().getAllMatches())
 		{
-			System.out.println(m.info());
+			//System.out.println(m.info());
 		}
 		
-		MatchManager.getInstance().saveMatches();
+		System.out.println(l1.showLeagueTable());
+		
+		
+		
+		//MatchManager.getInstance().saveMatches();
 	}
 }

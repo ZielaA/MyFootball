@@ -17,7 +17,6 @@ public class BinaryIOoperator<T extends Serializable> implements IOoperator<T> {
 		FileInputStream fstream = new FileInputStream(path);
 		ObjectInputStream objstream = new ObjectInputStream(fstream);
 		AbstractList<T> collection = (AbstractList<T>) objstream.readObject();
-		System.out.println(collection.size());
 		objstream.close();
 		return collection;
 	}

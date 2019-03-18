@@ -146,4 +146,9 @@ public class Club implements Serializable, ITextFileOutput {
 		}
 	}
 	
+	public AbstractList<Match> getMatches()
+	{
+		return matches;
+	}
+	
 }

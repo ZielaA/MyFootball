@@ -45,7 +45,6 @@ public class MatchManager {
 				l.add(m);
 			}
 		}
-		System.out.println(getAllMatches().size());
 		return l;
 	}
 
@@ -53,7 +52,6 @@ public class MatchManager {
 	{
 		Match m = matches.get(id);
 		setScore(m, new Score(0, 0));
-		//System.out.println(m.getHomeName() + "t");
 		
 		if(User.getInstance().isClubFavourite(m.getHomeName()) == true || 
 		   User.getInstance().isClubFavourite(m.getAwayName()) == true)
@@ -147,9 +145,11 @@ public class MatchManager {
 		
 		for(Match m: getAllMatches())
 		{
-			HtmlScoreReader sr = new HtmlScoreReader("http://www.sport.pl/pilka/2,116928,,,,178633894,P_SPORT_SLOWNIK.html#wyniki");
+			//HtmlScoreReader sr = new HtmlScoreReader("http://www.sport.pl/pilka/2,116928,,,,178633894,P_SPORT_SLOWNIK.html#wyniki");
 			if(m.getScore() == null && m.getMatchTime().before(new GregorianCalendar()))
 			{
+				HtmlScoreReader sr = m.getScoreReader();
+				if(sr != null)
 				m.setScore(sr.getScore(m));
 			}
 		}
