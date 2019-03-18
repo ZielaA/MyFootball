@@ -3,6 +3,8 @@ package MyFootball;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.AbstractList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import HTMLParser.HtmlScoreReader;
 
@@ -27,6 +29,7 @@ public class League {
 		}
 		
 		scoreReader = new HtmlScoreReader(url);
+		setScoreReaderForMatches();
 	}
 	
 	public String getLeagueName()
@@ -42,6 +45,7 @@ public class League {
 		{
 			s += c.toString() + "\n";
 		}
+		System.out.println(clubsRepo.getAll().size());
 		
 		return s;
 	}
@@ -78,5 +82,15 @@ public class League {
 				}
 			}
 		}
+	}
+	
+	public void sort()
+	{
+		Collections.sort(clubsRepo.getAll());
+	}
+	
+	public void sort(Comparator<Club> c)
+	{
+		Collections.sort(clubsRepo.getAll(), c);
 	}
 }

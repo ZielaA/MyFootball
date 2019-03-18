@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.AbstractList;
 
-public class Club implements Serializable, ITextFileOutput {
+public class Club implements Serializable, ITextFileOutput, Comparable<Club> {
 
 	final private String name;
 	private IRepository<Footballer, Integer> footballers;
@@ -149,6 +149,30 @@ public class Club implements Serializable, ITextFileOutput {
 	public AbstractList<Match> getMatches()
 	{
 		return matches;
+	}
+
+	@Override
+	public int compareTo(Club o) {
+		int res;
+		res = this.points - o.points;
+		if(res != 0) return res;
+		else
+		{
+			res = this.goalDifference - o.goalDifference;
+		}
+		if(res != 0) return res;
+		else
+		{
+			res = this.scoredGoals - o.scoredGoals;
+		}
+		if(res != 0) return res;
+		else
+		{
+			res = this.lostGoals - o.lostGoals;
+		}
+		return res;
+		
+		
 	}
 	
 }
