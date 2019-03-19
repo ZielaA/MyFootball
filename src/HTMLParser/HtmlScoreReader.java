@@ -33,13 +33,12 @@ public class HtmlScoreReader {
 	{
 		if(roundNumber != 1)
 		{
-			
 			String newUrl = new String();
 			
 			Elements elements = doc.select("div.mod_chooser > div.node_body > ul > li > a");
 			for(org.jsoup.nodes.Element e: elements)
 			{
-				if(e.text().contains(Integer.toString(roundNumber)))
+				if(e.text().equals(Integer.toString(roundNumber) + ". kolejka"))
 				{
 					newUrl = e.attr("href");
 					doc = Jsoup.connect(newUrl).get();
@@ -70,6 +69,7 @@ public class HtmlScoreReader {
 			{
 				score1 = Jsoup.parse(html).select("span.score > span.score1").first().text();
 				score2 = Jsoup.parse(html).select("span.score > span.score2").first().text();
+				//System.out.println(e.toString() + "           " + match.info());
 			}
 		}
 		return score1 + ":" + score2;
@@ -84,6 +84,11 @@ public class HtmlScoreReader {
 		
 		Score score = new Score(score1, score2);
 		return score;
+	}
+	
+	public String getUrl()
+	{
+		return url;
 	}
 
 }

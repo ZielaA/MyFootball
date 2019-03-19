@@ -39,7 +39,7 @@ public class DataManager {
 	public static void main(String[] args) {
 
 		
-		League l1 = new League("Serie_A", "http://www.sport.pl/pilka/2,116928,,,,178633894,P_SPORT_SLOWNIK.html");
+		//League l1 = new League("Serie_A", "http://www.sport.pl/pilka/2,116928,,,,178633894,P_SPORT_SLOWNIK.html");
 		MatchManager mm = MatchManager.getInstance();
 		do {
 

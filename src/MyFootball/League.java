@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.AbstractList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.GregorianCalendar;
 
 import HTMLParser.HtmlScoreReader;
 
@@ -13,6 +14,7 @@ public class League {
 	private String leguaName;
 	private IRepository<Club, String> clubsRepo;
 	private HtmlScoreReader scoreReader;
+	private String url;
 	
 	public League(String leagueName, String url)
 	{
@@ -29,7 +31,39 @@ public class League {
 		}
 		
 		scoreReader = new HtmlScoreReader(url);
+		this.url = url;
 		setScoreReaderForMatches();
+		
+//		for(Club c: getAllClubs())
+//		{
+//			MatchManager.getInstance().getScoresForPastMatches(c.getMatches());
+//		}
+		
+		initializePastMatches();
+		
+		
+		for(Club c: getAllClubs())
+		{
+			c.calculateStatsFromMatches();
+		}
+		
+	}
+	
+	private void initializePastMatches()
+	{
+		for(Club c: getAllClubs())
+		{
+			for(Match m: c.getMatches())
+			{
+				
+					HtmlScoreReader sr = new HtmlScoreReader(url); // CZEMU DZIA£A TYLKO GDY OBIEKT JEST TWORZONY LOKALNIE TO NIE MAM POJECIA!!!!!!!!!! 
+					if(m.getScore() == null && m.getMatchTime().before(new GregorianCalendar()))
+					{
+						m.setScore(sr.getScore(m));
+					}
+				
+			}
+		}
 	}
 	
 	public String getLeagueName()
@@ -72,11 +106,12 @@ public class League {
 	
 	private void setScoreReaderForMatches()
 	{
+		
 		for(Club c: clubsRepo.getAll())
 		{
 			for(Match m: c.getMatches())
 			{
-				if(m.getScoreReader() != null)
+				if(m.getScoreReader() == null)
 				{
 					m.setScoreReader(this.scoreReader);
 				}

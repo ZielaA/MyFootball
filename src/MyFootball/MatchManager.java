@@ -26,7 +26,7 @@ public class MatchManager {
 		}
 		
 		determinMatchesRound();
-		getScoresForPastMatches();
+		//getScoresForPastMatches();
 	}
 	
 	public static MatchManager getInstance()
@@ -133,24 +133,29 @@ public class MatchManager {
 				Collections.sort(mm);
 				for(int i=0; i<mm.size(); i++)
 				{
-					mm.get(i).setRoundNumber(i+1);
+					mm.get(i).setRoundNumber(i + 1);
 				}
 			}
 			
 		}
 	}
 	
-	private void getScoresForPastMatches()
+	public void getScoresForPastMatches(AbstractList<Match> matches)
 	{
 		
-		for(Match m: getAllMatches())
+		for(Match m: matches)
 		{
-			//HtmlScoreReader sr = new HtmlScoreReader("http://www.sport.pl/pilka/2,116928,,,,178633894,P_SPORT_SLOWNIK.html#wyniki");
+			HtmlScoreReader sr = new HtmlScoreReader("http://www.sport.pl/pilka/2,116928,,,,178633894,P_SPORT_SLOWNIK.html#wyniki");
 			if(m.getScore() == null && m.getMatchTime().before(new GregorianCalendar()))
 			{
-				HtmlScoreReader sr = m.getScoreReader();
+				
+			//	HtmlScoreReader sr = m.getScoreReader();
 				if(sr != null)
-				m.setScore(sr.getScore(m));
+				{
+					m.setScore(sr.getScore(m));
+					System.out.println("Go     " + m.info());
+				}
+				
 			}
 		}
 	}

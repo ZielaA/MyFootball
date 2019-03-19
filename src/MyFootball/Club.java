@@ -28,14 +28,14 @@ public class Club implements Serializable, ITextFileOutput, Comparable<Club> {
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
-		calculateStatsFromMatches();
-		goalDifference = scoredGoals - lostGoals;
-		points = wins * 3 + draws;
+		//calculateStatsFromMatches();
+		
 	}
 
-	private void calculateStatsFromMatches() {
+	public void calculateStatsFromMatches() {
 		reset();
-		for (Match m : matches) {
+		for (Match m : matches) 
+		{
 			if (m.getScore() != null) {
 
 				if (m.getHomeName() == this.name) {
@@ -61,6 +61,8 @@ public class Club implements Serializable, ITextFileOutput, Comparable<Club> {
 				}
 			}
 		}
+		goalDifference = scoredGoals - lostGoals;
+		points = wins * 3 + draws;
 	}
 	
 	private void reset()
@@ -154,21 +156,21 @@ public class Club implements Serializable, ITextFileOutput, Comparable<Club> {
 	@Override
 	public int compareTo(Club o) {
 		int res;
-		res = this.points - o.points;
+		res = o.points - this.points;
 		if(res != 0) return res;
 		else
 		{
-			res = this.goalDifference - o.goalDifference;
+			res = o.goalDifference - this.goalDifference;
 		}
 		if(res != 0) return res;
 		else
 		{
-			res = this.scoredGoals - o.scoredGoals;
+			res = o.scoredGoals - this.scoredGoals;
 		}
 		if(res != 0) return res;
 		else
 		{
-			res = this.lostGoals - o.lostGoals;
+			res = o.lostGoals - this.lostGoals;
 		}
 		return res;
 		
