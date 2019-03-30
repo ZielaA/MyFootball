@@ -56,9 +56,10 @@ public class League {
 			for(Match m: c.getMatches())
 			{
 				
-					HtmlScoreReader sr = new HtmlScoreReader(url); // CZEMU DZIA£A TYLKO GDY OBIEKT JEST TWORZONY LOKALNIE TO NIE MAM POJECIA!!!!!!!!!! 
+					
 					if(m.getScore() == null && m.getMatchTime().before(new GregorianCalendar()))
 					{
+						HtmlScoreReader sr = new HtmlScoreReader(url); // CZEMU DZIA£A TYLKO GDY OBIEKT JEST TWORZONY LOKALNIE TO NIE MAM POJECIA!!!!!!!!!! 
 						m.setScore(sr.getScore(m));
 					}
 				

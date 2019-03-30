@@ -1,5 +1,6 @@
 package MyFootball;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -117,11 +118,27 @@ public class Match implements Serializable, Comparable<Match>
 			timer.schedule(new TimerTask(){
 				public void run()
 				{
-					MatchManager.getInstance().startMatch(id);
+					MatchManager.getInstance().checkForMatchUpdate(id);
 				}
-			}, calculateDateToMiliseconds(matchTime));
+			}, calculateDateToMiliseconds(matchTime), 6000);
+			
+			Timer endTimer = new Timer();
+			endTimer.schedule(new TimerTask() {
+				
+				@Override
+				public void run() {
+					timer.cancel();
+					try {
+						MatchManager.getInstance().saveMatches();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}, 6000 * 120);
 		}
 	}
+	
 	
 	public boolean involvesClub(String clubName)
 	{

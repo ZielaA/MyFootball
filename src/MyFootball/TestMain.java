@@ -174,6 +174,6 @@ public class TestMain {
 		
 		
 		
-		//MatchManager.getInstance().saveMatches();
+		MatchManager.getInstance().saveMatches();
 	}
 }

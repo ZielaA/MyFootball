@@ -47,16 +47,50 @@ public class MatchManager {
 		}
 		return l;
 	}
+	
+	public void startMatch(Match m)
+	{
+		//Match m = matches.get(id);
+		if(m != null)
+		{
+			setScore(m, new Score(0, 0));
+			
+			if(User.getInstance().isClubFavourite(m.getHomeName()) == true || 
+			   User.getInstance().isClubFavourite(m.getAwayName()) == true)
+			{
+				User.getInstance().notify("Match started: " + m.info());
+			}
+		}
+		else
+		{
+			throw new NullPointerException();
+		}
+		
+	}
 
 	public void startMatch(long id)
 	{
 		Match m = matches.get(id);
-		setScore(m, new Score(0, 0));
-		
-		if(User.getInstance().isClubFavourite(m.getHomeName()) == true || 
-		   User.getInstance().isClubFavourite(m.getAwayName()) == true)
+		startMatch(m);
+	}
+	
+	public void checkForMatchUpdate(long id)
+	{
+		Match m = getMatch(id);
+		if(m.getScore() == null) 
 		{
-			User.getInstance().notify("Match started: " + m.info());
+			startMatch(id);
+		}
+		
+		Score newScore = m.getScoreReader().getScore(m);
+		if(!m.getScore().equals(newScore))
+		{
+			
+			if(User.getInstance().isClubFavourite(m.getHomeName()) == true || 
+					   User.getInstance().isClubFavourite(m.getAwayName()) == true)
+			{
+			User.getInstance().notify("Goal!: " + m.info());
+			}
 		}
 	}
 	
@@ -145,10 +179,10 @@ public class MatchManager {
 		
 		for(Match m: matches)
 		{
-			HtmlScoreReader sr = new HtmlScoreReader("http://www.sport.pl/pilka/2,116928,,,,178633894,P_SPORT_SLOWNIK.html#wyniki");
+			
 			if(m.getScore() == null && m.getMatchTime().before(new GregorianCalendar()))
 			{
-				
+				HtmlScoreReader sr = new HtmlScoreReader("http://www.sport.pl/pilka/2,116928,,,,178633894,P_SPORT_SLOWNIK.html#wyniki");
 			//	HtmlScoreReader sr = m.getScoreReader();
 				if(sr != null)
 				{

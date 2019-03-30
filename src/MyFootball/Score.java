@@ -41,4 +41,16 @@ public class Score implements Serializable
 	public String toString() {
 		return homeGoals + ":" + awayGoals;
 	}
+	
+	@Override
+	public boolean equals(Object other)
+	{
+		if(this == other) return true;
+		if(other == null) return false;
+		if(getClass() != other.getClass()) return false;
+		Score s = (Score) other;
+		
+		if(this.homeGoals == s.homeGoals && this.awayGoals == s.awayGoals) return true;
+		else return false;
+	}
 }
